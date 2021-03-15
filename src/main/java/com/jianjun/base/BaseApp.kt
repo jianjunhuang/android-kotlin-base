@@ -1,6 +1,6 @@
 package com.jianjun.base
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 
-open class BaseApp : Application() {
+open class BaseApp : MultiDexApplication() {
 }

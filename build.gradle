@@ -15,6 +15,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        multiDexEnabled true
+
     }
 
     buildTypes {
@@ -92,5 +95,8 @@ dependencies {
     implementation "androidx.activity:activity-ktx:$activity_version"
     // Kotlin
     implementation "androidx.activity:activity-ktx:$activity_version"
+
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
 
 }
