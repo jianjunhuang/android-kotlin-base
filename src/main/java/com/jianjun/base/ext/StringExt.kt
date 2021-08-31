@@ -20,3 +20,7 @@ val String.md5: String?
         }
         return ""
     }
+
+fun String.firstOrEmpty(): String {
+    return this.firstOrNull()?.toString() ?: ""
+}
