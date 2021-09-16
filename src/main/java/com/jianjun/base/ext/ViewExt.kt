@@ -38,6 +38,10 @@ fun View.measureExactly(widthSize: Int, heightSize: Int) {
     )
 }
 
+fun View.layout(left: Int, top: Int) {
+    this.layout(left, top, left + this.measuredWidth, top + this.measuredHeight)
+}
+
 // ---------------------------- Convert ---------------------------------------------
 val Float.dp
     get() = TypedValue.applyDimension(
