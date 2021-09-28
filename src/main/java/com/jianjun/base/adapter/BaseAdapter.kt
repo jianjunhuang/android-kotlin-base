@@ -18,7 +18,18 @@ abstract class BaseAdapter<D : Any, V : BaseViewHolder<D>> : RecyclerView.Adapte
         onBindViewHolder(holder, position, getData(position))
     }
 
+    override fun onBindViewHolder(holder: V, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            onBindViewHolder(holder, position, getData(position), payloads)
+        }
+    }
+
     protected abstract fun onBindViewHolder(holder: V, position: Int, data: D)
+    open fun onBindViewHolder(holder: V, position: Int, data: D, payloads: MutableList<Any>) {
+
+    }
 
     fun getData(position: Int): D {
         return diffUtil.currentList[position]
