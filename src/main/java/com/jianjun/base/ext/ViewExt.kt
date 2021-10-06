@@ -12,8 +12,14 @@ val Int.measureSize
 val Int.measureMode
     get() = View.MeasureSpec.getMode(this)
 
+/**
+ * set MeasureSpec.mode to AT_MOST
+ */
 val Int.toAtMostSpec
     get() = View.MeasureSpec.makeMeasureSpec(this.measureSize, View.MeasureSpec.AT_MOST)
+/**
+ * set MeasureSpec.mode to EXACTLY
+ */
 val Int.toExactlySpec
     get() = View.MeasureSpec.makeMeasureSpec(this.measureSize, View.MeasureSpec.EXACTLY)
 

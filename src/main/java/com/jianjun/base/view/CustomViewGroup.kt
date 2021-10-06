@@ -48,16 +48,25 @@ open class CustomViewGroup : ViewGroup {
         crossinline onMeasure: T.(widthMeasureSpec: Int, heightMeasureSpec: Int) -> Unit,
         crossinline onLayout: T.(changed: Boolean, l: Int, t: Int, r: Int, b: Int) -> Unit
     ): T {
-        init()
+        create(init, onMeasure, onLayout)
+        return this
+    }
+
+    protected inline fun <T : View> T.create(
+        init: T.() -> Unit,
+        crossinline onMeasure: T.(widthMeasureSpec: Int, heightMeasureSpec: Int) -> Unit,
+        crossinline onLayout: T.(changed: Boolean, l: Int, t: Int, r: Int, b: Int) -> Unit
+    ): T {
+        init.invoke(this)
         addView(this)
         measureQueue.add(object : IMeasure {
             override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-                onMeasure.invoke(this@added, widthMeasureSpec, heightMeasureSpec)
+                onMeasure.invoke(this@create, widthMeasureSpec, heightMeasureSpec)
             }
         })
         layoutQueue.add(object : ILayout {
             override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-                onLayout.invoke(this@added, changed, l, t, r, b)
+                onLayout.invoke(this@create, changed, l, t, r, b)
             }
         })
         return this
