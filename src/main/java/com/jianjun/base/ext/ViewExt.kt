@@ -5,6 +5,7 @@ import android.graphics.Paint
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 
 // ----------------------------- Measure -------------------------------------------
 val Int.measureSize
@@ -17,6 +18,7 @@ val Int.measureMode
  */
 val Int.toAtMostSpec
     get() = View.MeasureSpec.makeMeasureSpec(this.measureSize, View.MeasureSpec.AT_MOST)
+
 /**
  * set MeasureSpec.mode to EXACTLY
  */
@@ -46,6 +48,10 @@ fun View.measureExactly(widthSize: Int, heightSize: Int) {
 
 fun View.layout(left: Int, top: Int) {
     this.layout(left, top, left + this.measuredWidth, top + this.measuredHeight)
+}
+
+fun View.colorInt(colorRes: Int): Int {
+    return ResourcesCompat.getColor(resources, colorRes, null)
 }
 
 // ---------------------------- Convert ---------------------------------------------
