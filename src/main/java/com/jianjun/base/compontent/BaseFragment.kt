@@ -9,4 +9,8 @@ abstract class BaseFragment : Fragment() {
     private inline fun <reified T : ViewModel> Fragment.viewModels() = lazy {
         ViewModelProvider(requireActivity()).get(T::class.java)
     }
+
+    fun onBackPressed(): Boolean {
+        return false
+    }
 }
