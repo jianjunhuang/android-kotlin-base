@@ -1,6 +1,5 @@
 package com.jianjun.base.compontent
 
-import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,10 +14,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //Fix Build.VERSION_CODES.O: java.lang.IllegalStateException: Only fullscreen opaque activities can request orientation
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O || isTransparent()) {
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        }
         super.onCreate(savedInstanceState)
     }
 
@@ -41,5 +36,20 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
         super.onBackPressed()
+    }
+
+    //Fix Build.VERSION_CODES.O: java.lang.IllegalStateException: Only fullscreen opaque activities can request orientation
+    private fun isNeedToFixOrientation(): Boolean {
+        if ((Build.VERSION.SDK_INT == Build.VERSION_CODES.O || Build.VERSION.SDK_INT == Build.VERSION_CODES.O_MR1) && isTransparent()) {
+            return true
+        }
+        return false
+    }
+
+    override fun setRequestedOrientation(requestedOrientation: Int) {
+        if (isNeedToFixOrientation()) {
+            return
+        }
+        super.setRequestedOrientation(requestedOrientation)
     }
 }
