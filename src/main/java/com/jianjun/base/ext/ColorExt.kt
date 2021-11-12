@@ -11,3 +11,6 @@ val Int.isDark
  */
 val Int.toHexColor
     get() = String.format("#%06X", 0xFFFFFF and this)
+
+val Int.toHexColorAlpha
+    get() = String.format("#%08X", 0xFFFFFFFF and this.toLong())
