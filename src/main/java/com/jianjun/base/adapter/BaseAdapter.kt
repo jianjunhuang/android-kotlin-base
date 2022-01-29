@@ -9,7 +9,7 @@ abstract class BaseAdapter<D : Any, V : BaseViewHolder<D>> : RecyclerView.Adapte
 
     protected abstract fun onDiffCallback(): DiffUtil.ItemCallback<D>
 
-    private val diffUtil = AsyncListDiffer<D>(this, onDiffCallback())
+    protected open val diffUtil = AsyncListDiffer<D>(this, onDiffCallback())
 
     protected var clickListener: OnItemClickListener<D>? = null
     protected var longClickListener: OnItemLongClickListener<D>? = null
@@ -34,6 +34,9 @@ abstract class BaseAdapter<D : Any, V : BaseViewHolder<D>> : RecyclerView.Adapte
     fun getData(position: Int): D {
         return diffUtil.currentList[position]
     }
+
+    fun getDataList(): List<D> = diffUtil.currentList
+    protected fun getMutableDataList(): MutableList<D> = diffUtil.currentList
 
     override fun getItemCount(): Int {
         return diffUtil.currentList.size
