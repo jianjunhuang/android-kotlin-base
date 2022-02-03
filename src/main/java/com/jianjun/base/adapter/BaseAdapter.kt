@@ -59,18 +59,18 @@ abstract class BaseAdapter<D : Any, V : BaseViewHolder<D>> : RecyclerView.Adapte
     }
 
     interface OnItemClickListener<D : Any> {
-        fun onItemClicked(position: Int, data: D, adapter: BaseAdapter<D, *>)
+        fun onItemClicked(position: Int, data: D?, adapter: BaseAdapter<D, *>)
     }
 
     interface OnItemLongClickListener<D : Any> {
-        fun onItemLongClicked(position: Int, data: D, adapter: BaseAdapter<D, *>)
+        fun onItemLongClicked(position: Int, data: D?, adapter: BaseAdapter<D, *>)
     }
 
     fun BaseViewHolder<D>.bindClick() {
         this.itemView.setOnClickListener {
             clickListener?.onItemClicked(
                 this.adapterPosition,
-                diffUtil.currentList[adapterPosition],
+                diffUtil.currentList.getOrNull(adapterPosition),
                 this@BaseAdapter
             )
         }
@@ -80,7 +80,7 @@ abstract class BaseAdapter<D : Any, V : BaseViewHolder<D>> : RecyclerView.Adapte
         this.itemView.setOnLongClickListener {
             longClickListener?.onItemLongClicked(
                 this.adapterPosition,
-                diffUtil.currentList[adapterPosition],
+                diffUtil.currentList.getOrNull(adapterPosition),
                 this@BaseAdapter
             )
             return@setOnLongClickListener true
