@@ -5,6 +5,8 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdk 31
 
+    namespace "xyz.juncat.base"
+
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 31
