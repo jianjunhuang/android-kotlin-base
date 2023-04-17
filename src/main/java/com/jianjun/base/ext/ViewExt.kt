@@ -101,15 +101,31 @@ fun View.gone() {
 // ------------------------------------------------------------------
 
 fun View.setMatchParent() {
-    layoutParams = ViewGroup.LayoutParams(
+    setLayoutParamsSize(
         ViewGroup.LayoutParams.MATCH_PARENT,
         ViewGroup.LayoutParams.MATCH_PARENT
     )
 }
 
 fun View.setWrapParent() {
-    layoutParams = ViewGroup.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.MATCH_PARENT
+    setLayoutParamsSize(
+        ViewGroup.LayoutParams.WRAP_CONTENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
     )
+}
+
+fun View.setMatchWith() {
+    setLayoutParamsSize(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
+}
+
+fun View.setLayoutParamsSize(width: Int, height: Int) {
+    if (layoutParams != null) {
+        layoutParams.width = width
+        layoutParams.height = height
+    } else {
+        layoutParams = ViewGroup.LayoutParams(width, height)
+    }
 }
