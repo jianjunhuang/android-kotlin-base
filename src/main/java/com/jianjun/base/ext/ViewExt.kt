@@ -114,7 +114,7 @@ fun View.setWrapParent() {
     )
 }
 
-fun View.setMatchWith() {
+fun View.setMatchWidth() {
     setLayoutParamsSize(
         ViewGroup.LayoutParams.MATCH_PARENT,
         ViewGroup.LayoutParams.WRAP_CONTENT
